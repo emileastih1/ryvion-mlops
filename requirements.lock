@@ -1,0 +1,10 @@
+# Les dependances du lab 5, epinglees. Les memes pour l'entrainement et pour le
+# service : c'est ce qui garantit que le modele charge dans le conteneur est le
+# modele produit sur votre machine.
+mlflow==3.4.0
+scikit-learn==1.7.2
+pandas==2.3.3
+numpy==2.2.6
+fastapi==0.128.0
+uvicorn==0.38.0
+pydantic==2.12.3
