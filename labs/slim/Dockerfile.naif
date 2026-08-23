@@ -1,0 +1,22 @@
+# L'image de service telle qu'on l'ecrit spontanement.
+#
+# C'est le Dockerfile du cas concret de 3.6, adapte a ce depot. Vous en avez
+# deja liste les defauts en binome. Le lab 4 consiste a les chiffrer, puis a les
+# corriger un par un -- en mesurant apres chaque correction.
+#
+# Ne le modifiez pas : vous travaillerez sur une copie.
+#
+#   docker build -t maigrir:v0 -f labs/slim/Dockerfile.naif .
+
+FROM python:3.11-slim
+
+RUN apt-get update
+RUN apt-get install -y build-essential curl vim
+
+COPY . /app
+WORKDIR /app
+
+RUN pip install -r labs/slim/requirements.txt
+
+EXPOSE 8000
+CMD python labs/slim/service.py
