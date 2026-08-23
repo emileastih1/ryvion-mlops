@@ -1,0 +1,34 @@
+RESULTATS DE REFERENCE - automobile.training.train
+==================================================
+
+392 lignes chargees
+MSE : 10.5024
+R2  : 0.7942
+
+Coefficients (cylinders, displacement, horsepower, weight, acceleration, model year) :
+  -0.116173000
+   0.001013474
+  -0.002276344
+  -0.006561006
+   0.061735508
+   0.760636444
+
+
+D'ou viennent ces chiffres, et pourquoi ce fichier est genant
+-------------------------------------------------------------
+
+Ils ne figuraient nulle part dans le depot de 2019. Aucun run n'avait ete
+enregistre, aucune metrique n'avait ete versionnee : le modele etait entraine,
+et le chiffre vivait dans le terminal de la personne qui avait lance la commande.
+
+Ce fichier a donc ete reconstitue en 2026, en restituant l'environnement
+d'origine (Python 3.7, scikit-learn 0.21.3) pour rejouer l'entrainement.
+
+Retenez la sequence, parce qu'elle est le vrai sujet du lab : il a fallu
+reparer l'environnement AVANT de pouvoir savoir ce que le modele valait. Sans
+ces six coefficients, « le conteneur demarre a nouveau » n'est pas une
+verification -- c'est une esperance.
+
+Enregistrer ce chiffre au moment de l'entrainement, automatiquement et a cote
+de la version du code qui l'a produit, est exactement ce que fait MLflow au
+paragraphe 5. Ce fichier est ce qu'on ecrit a la main quand personne ne l'a fait.

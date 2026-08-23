@@ -1,0 +1,17 @@
+# Ce que « pandas / scikit-learn » resolvait reellement, une fois l'environnement
+# de 2019 restitue. Aucune de ces huit lignes n'etait ecrite nulle part dans le
+# depot d'origine : deux etaient declarees, six sont arrivees toutes seules.
+#
+# C'est la difference entre un fichier de dependances et un lock file, et c'est
+# la raison pour laquelle epingler ses dependances directes ne suffit pas.
+#
+#   docker build -t autopsie:epingle -f labs/Dockerfile.epingle .
+
+joblib==1.3.2
+numpy==1.21.6
+pandas==1.3.5
+python-dateutil==2.9.0.post0
+pytz==2026.3.post1
+scikit-learn==0.21.3
+scipy==1.7.3
+six==1.17.0

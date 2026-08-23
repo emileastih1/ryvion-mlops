@@ -1,0 +1,20 @@
+# Le Dockerfile qu'on ecrit spontanement autour d'un depot qu'on veut « sauver ».
+#
+# Il est naif au sens propre : il n'epingle rien. Ni l'image de base au-dela de
+# la version mineure de Python, ni une seule des dependances installees. C'est
+# exactement le geste que le lab 1 vous demande d'observer -- et il ne suffit
+# pas.
+#
+#   docker build -t autopsie:naif -f labs/Dockerfile.naif .
+#   docker run --rm autopsie:naif
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY labs/2019/requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY labs/2019/ ./
+
+CMD ["python", "-m", "automobile.training.train"]
