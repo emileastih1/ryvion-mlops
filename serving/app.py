@@ -19,12 +19,22 @@ _model = None
 
 
 class Voiture(BaseModel):
-    cylinders: float
+    """Le format d'entree, et il n'est pas choisi au hasard.
+
+    Les types suivent la signature que MLflow a deduite du jeu
+    d'entrainement : `cylinders`, `weight` et `model year` y sont des entiers,
+    les trois autres des reels. MLflow refuse de convertir un reel en entier a
+    l'entree -- il considere, a juste titre, que c'est une perte silencieuse.
+    Declarer `int` ici plutot que `float` est donc ce qui fait tenir le
+    contrat entre l'entrainement et le service.
+    """
+
+    cylinders: int
     displacement: float
     horsepower: float | None = None
-    weight: float
+    weight: int
     acceleration: float
-    model_year: float = Field(alias="model year")
+    model_year: int = Field(alias="model year")
 
     model_config = {"populate_by_name": True}
 
