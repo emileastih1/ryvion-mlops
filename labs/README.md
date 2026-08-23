@@ -37,11 +37,9 @@ git checkout lab/2019-archive
 ```
 labs/
 ├── Dockerfile.naif                     ce qu'on écrit spontanément — n'épingle rien
-├── Dockerfile.epingle                  la réparation « épingler le passé »
 └── 2019/
     ├── automobile/training/train.py    le code de 2019, non modifié
     ├── requirements.txt                deux lignes, aucune version
-    ├── requirements-2019.lock.txt      ce que ces deux lignes résolvaient vraiment
     ├── data/auto-mpg.csv               398 voitures
     └── RESULTATS-2019.txt              lisez-le à la fin, pas avant
 ```
@@ -130,9 +128,22 @@ Reconstruisez, exécutez. **Cette fois le modèle s'entraîne.**
 
 Regardez aussi ce qui s'affiche : neuf `DeprecationWarning` venant de **numpy**.
 Vous avez épinglé les deux paquets que vous aviez écrits ; numpy, que personne
-n'a jamais nommé, est arrivé quand même et a bougé de son côté. C'est la
-différence entre un fichier de dépendances et un *lock file* — comparez
-`requirements.txt` (2 lignes) et `requirements-2019.lock.txt` (8).
+n'a jamais nommé, est arrivé quand même — et a bougé de son côté.
+
+Comptez vous-même ce qu'il y a réellement dans l'image :
+
+```bash
+docker run --rm --entrypoint pip autopsie:naif list
+```
+
+Ignorez `pip`, `setuptools` et `wheel` — l'outillage d'installation est toujours
+présent. Il reste **8** paquets. Vous en aviez déclaré **2**.
+
+Les six autres sont des dépendances transitives : elles sont arrivées parce que
+pandas et scikit-learn en avaient besoin, et **rien dans votre dépôt ne dit
+quelle version elles doivent avoir**. C'est toute la différence entre un fichier
+de dépendances et un *lock file* — et c'est pour cela que votre réparation, aussi
+correcte soit-elle, ne fige encore qu'une partie de l'environnement.
 
 ---
 
